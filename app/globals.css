@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000000;
+  background-image: 
+    radial-gradient(at 20% 10%, rgba(107, 154, 255, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(217, 127, 233, 0.08) 0px, transparent 50%);
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6b9aff 0%, #d97fe9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card {
+  background: rgba(15, 20, 35, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(107, 154, 255, 0.4);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+  border-color: rgba(107, 154, 255, 0.8);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(107, 154, 255, 0.4);
+  background: rgba(20, 25, 45, 0.98);
+}
+
+.tech-badge {
+  background: rgba(107, 154, 255, 0.15);
+  border: 1px solid rgba(107, 154, 255, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #6b9aff;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  background: rgba(107, 154, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(107, 154, 255, 0.5), transparent);
+  margin: 1rem 0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e27;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6b9aff, #d97fe9);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5a89ee, #c86ed8);
+}
+
+.section-alternate {
+  background: rgba(10, 12, 20, 0.6);
+  border-top: 1px solid rgba(107, 154, 255, 0.15);
+  border-bottom: 1px solid rgba(107, 154, 255, 0.15);
+}
+
+.skill-category-box {
+  background: rgba(15, 20, 35, 0.9);
+  border: 1.5px solid rgba(107, 154, 255, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.skill-category-box:hover {
+  border-color: rgba(107, 154, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(107, 154, 255, 0.2);
+}
