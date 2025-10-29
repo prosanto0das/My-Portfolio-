@@ -100,6 +100,13 @@ const recognitions: Recognition[] = [
     link: 'https://toph.co/c/mtb-presents-aust-inter-university-2025/standings',
   },
   {
+    title: '49th in SEC Inter University Junior Programming Contest, 2022',
+    icon: FaTrophy,
+    color: 'from-yellow-400 to-orange-500',
+    score: 535,
+    link: 'https://toph.co/c/sec-inter-university-junior-2022/standings',
+  },
+  {
     title: '51st in CUET CodeStorm 1.0',
     icon: FaTrophy,
     color: 'from-yellow-400 to-orange-500',
