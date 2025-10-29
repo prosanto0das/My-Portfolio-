@@ -1,8 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { 
   SiCplusplus, SiPython, SiJavascript, SiMysql, SiPostgresql, SiMongodb,
   SiReact, SiNextdotjs, SiNodedotjs, SiDjango, SiPhp, SiExpress, SiRedux,
@@ -58,6 +58,16 @@ const skillCategories = [
 export default function TechnicalSkills() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  // Auto-advance slideshow every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % skillCategories.length)
+    }, 6000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <section ref={ref} className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
@@ -74,47 +84,92 @@ export default function TechnicalSkills() {
         </p>
         <div className="section-divider mb-12" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
+        {/* Slideshow Container */}
+        <div className="relative overflow-hidden min-h-[500px] flex items-center justify-center">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={categoryIndex}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="card p-6"
+              key={currentSlide}
+              initial={{ opacity: 0, x: 300, rotateY: 90 }}
+              animate={{ opacity: 1, x: 0, rotateY: 0 }}
+              exit={{ opacity: 0, x: -300, rotateY: -90 }}
+              transition={{ 
+                duration: 0.5,
+                ease: "easeInOut"
+              }}
+              className="w-full max-w-4xl"
             >
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-1 h-8 bg-gradient-to-b from-accent-blue to-accent-purple rounded-full"></span>
-                {category.title}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {category.skills.map((skill, skillIndex) => {
-                  const Icon = skill.icon
-                  return (
-                    <motion.div
-                      key={skillIndex}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ 
-                        duration: 0.4, 
-                        delay: categoryIndex * 0.1 + skillIndex * 0.05 
-                      }}
-                      whileHover={{ scale: 1.05, y: -3 }}
-                      className="flex flex-col items-center gap-3 p-4 bg-slate-900/30 rounded-lg border border-slate-700/30 cursor-pointer group hover:border-accent-blue/50 hover:bg-slate-900/50 transition-all"
-                    >
-                      <Icon 
-                        className="text-4xl transition-all duration-300 group-hover:scale-110" 
-                        style={{ color: skill.color }}
-                      />
-                      <span className="text-sm font-medium text-gray-300 group-hover:text-accent-blue transition-colors text-center">
-                        {skill.name}
-                      </span>
-                    </motion.div>
-                  )
-                })}
+              <div className="card p-8 md:p-12">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                  <span className="w-1 h-10 bg-gradient-to-b from-accent-blue to-accent-purple rounded-full"></span>
+                  {skillCategories[currentSlide].title}
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                  {skillCategories[currentSlide].skills.map((skill, skillIndex) => {
+                    const Icon = skill.icon
+                    return (
+                      <motion.div
+                        key={skillIndex}
+                        initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        transition={{ 
+                          duration: 0.4, 
+                          delay: skillIndex * 0.05,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          scale: 1.15, 
+                          y: -10,
+                          rotate: [0, -5, 5, 0],
+                          transition: {
+                            rotate: {
+                              duration: 0.5,
+                              repeat: Infinity,
+                              repeatType: "reverse"
+                            }
+                          }
+                        }}
+                        className="flex flex-col items-center gap-4 p-6 bg-slate-900/30 rounded-lg border border-slate-700/30 cursor-pointer group hover:border-accent-blue/50 hover:bg-slate-900/50 transition-all"
+                      >
+                        <motion.div
+                          animate={{
+                            rotate: 360,
+                          }}
+                          transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        >
+                          <Icon 
+                            className="text-5xl transition-all duration-300 group-hover:scale-110" 
+                            style={{ color: skill.color }}
+                          />
+                        </motion.div>
+                        <span className="text-base font-medium text-gray-300 group-hover:text-accent-blue transition-colors text-center">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    )
+                  })}
+                </div>
               </div>
             </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Dot Navigation */}
+        <div className="flex justify-center items-center gap-4 mt-12">
+          {skillCategories.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`transition-all duration-300 rounded-full ${
+                currentSlide === index
+                  ? 'w-12 h-4 bg-gradient-to-r from-accent-blue to-accent-purple'
+                  : 'w-4 h-4 bg-slate-700 hover:bg-slate-600'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
 
@@ -122,7 +177,7 @@ export default function TechnicalSkills() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-8 card p-6"
+          className="mt-12 card p-6"
         >
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3">
             <span className="w-1 h-8 bg-gradient-to-b from-accent-blue to-accent-purple rounded-full"></span>
