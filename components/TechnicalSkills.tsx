@@ -60,11 +60,11 @@ export default function TechnicalSkills() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Auto-advance slideshow every 6 seconds
+  // Auto-advance slideshow every 4 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % skillCategories.length)
-    }, 6000)
+    }, 4000)
 
     return () => clearInterval(timer)
   }, [])
