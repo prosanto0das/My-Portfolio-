@@ -79,7 +79,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          Software Engineer | Competitive Programmer
+          Competitive Programmer
         </motion.p>
 
         <motion.p
@@ -88,7 +88,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          Passionate problem solver with <span className="text-accent-blue font-semibold">Expert</span> rating on Codeforces. 
+          Passionate problem solver with <span className="text-accent-blue font-semibold">Expert</span> rating on Codeforces and <span className="text-accent-blue font-semibold">5★</span> on CodeChef. 
           Specialized in algorithms, data structures, and building scalable full-stack applications. 
           Solved <span className="text-accent-blue font-semibold">2800+</span> competitive programming problems across multiple platforms.
         </motion.p>
