@@ -12,7 +12,7 @@
 
 *Clean dark UI • Smooth animations • Fully responsive • SEO optimized*
 
-[View Live Demo](#) • [Report Bug](https://github.com/prosanto0das/My-Portfolio-/issues) • [Request Feature](https://github.com/prosanto0das/My-Portfolio-/issues)
+[🌐 View Live Demo](https://my-portfolio-ten-taupe-61.vercel.app/) • [Report Bug](https://github.com/prosanto0das/My-Portfolio-/issues) • [Request Feature](https://github.com/prosanto0das/My-Portfolio-/issues)
 
 </div>
 
@@ -43,7 +43,15 @@
 
 ## 🎯 About the Project
 
-This is a modern, professional portfolio website built with cutting-edge web technologies. It showcases my academic background, technical skills, professional journey, featured projects, research experience, leadership roles, competitive programming achievements, and awards. The website is designed with a focus on performance, accessibility, and user experience.
+This is a modern, professional portfolio website showcasing my journey as a Computer Science student at Shahjalal University of Science and Technology (SUST). The portfolio highlights my competitive programming achievements (Codeforces Expert, CodeChef 5★), technical projects, research experience in NLP and algorithms, leadership roles, and extracurricular activities. Built with cutting-edge web technologies, the website is designed with a focus on performance, accessibility, and user experience.
+
+### Portfolio Highlights
+
+- **🏆 Competitive Programming**: Codeforces Expert (1640 rating), CodeChef 5★ (2007 rating), 2800+ problems solved
+- **💻 Full-Stack Projects**: MERN stack applications including blogging platforms, lodging marketplaces, and real-time multiplayer games
+- **🔬 Research**: NLP-based problem tag detection (66% accuracy) and genome sequence reconstruction using graph algorithms
+- **👨‍🏫 Leadership**: Mentor at SUST CP Training Camp, Problem Setter for NHSPC 2025
+- **🏓 Sports**: SUST Table Tennis Champion, University Team Member 2025
 
 ### Why This Portfolio?
 
@@ -83,6 +91,28 @@ This is a modern, professional portfolio website built with cutting-edge web tec
 
 ---
 
+## 🏆 Key Achievements Highlighted
+
+### Competitive Programming
+- **2800+ Problems Solved** across Codeforces, CodeChef, AtCoder, CSES, LightOJ, Toph, SPOJ
+- **Top 100 Placements**: Multiple IUPC rankings including 27th at DUET, 36th at KUET, 58th at ICPC Preliminary
+- **Contest Winner**: Champion at 8th DRMC International Tech Carnival 2025, Finalist at SRBD Code Contest 2025
+
+### Mathematics
+- **5th Place** at National Undergraduate Mathematics Olympiad Bangladesh 2022 (Sylhet Region)
+
+### Leadership & Community
+- Mentored and coordinated SUST Competitive Programming Training Camp
+- Problem Setter and Mentor for NHSPC 2025
+- Active contributor to programming community development
+
+### Sports
+- **Table Tennis Champion** at SUST CSE Intra TT (Singles & Doubles)
+- **Champion** at SUST Open TT (Singles)
+- Selected for SUST University Team 2025
+
+---
+
 ## 🛠️ Tech Stack
 
 ### Core Technologies
@@ -100,6 +130,13 @@ This is a modern, professional portfolio website built with cutting-edge web tec
 - **PostCSS** - CSS processing
 - **Autoprefixer** - CSS vendor prefixing
 - **Next.js Config** - Custom build configuration
+
+### Technical Skills Showcased
+- **Programming Languages**: C, C++, Java, Python, JavaScript, SQL
+- **Web Development**: MERN Stack (MongoDB, Express, React, Node.js), HTML, CSS
+- **Databases**: MySQL, MongoDB, PostgreSQL, Prisma
+- **Tools & Platforms**: Git, GitHub, Linux, Windows, Arduino/IoT
+- **Competitive Programming**: 2800+ problems solved across multiple platforms
 
 ---
 
@@ -227,10 +264,11 @@ My-Portfolio-/
 - Animated skill cards
 
 ### 3. **Featured Projects** (`FeaturedProjects.tsx`)
-- Project cards with descriptions
-- Technology badges
-- GitHub repository links
-- Live demo links (if applicable)
+- **Blogger Bro**: Full-stack blogging platform (Next.js, MongoDB, Tailwind CSS)
+- **Lodgify**: Lodging marketplace with real-time booking (React, Node.js, Express, MongoDB, Prisma)
+- **AGNIM**: Real-time multiplayer strategy game with WebSocket matchmaking (React, Node.js, PostgreSQL)
+- **Smart Parking System**: IoT-based parking solution with Arduino and real-time monitoring
+- Technology badges and GitHub repository links
 
 ### 4. **Professional Journey** (`ProfessionalJourney.tsx`)
 - Work experience timeline
@@ -238,29 +276,42 @@ My-Portfolio-/
 - Key responsibilities and achievements
 
 ### 5. **Research Experience** (`Research.tsx`)
-- Research publications
-- Conference papers
-- Academic contributions
+- **Problem Tag Detection**: NLP/ML project with 8K-problem dataset, 66% accuracy using DistilBERT
+- **Genome Sequence Reconstruction**: Scalable overlap detection using k-mer indexing and graph algorithms
+- Research methodologies and findings
 
 ### 6. **Leadership** (`Leadership.tsx`)
-- Leadership roles in organizations
-- Team activities and initiatives
-- Community involvement
+- **SUST CP Training Camp**: Mentor & Coordinator - lectures, coaching, and camp management
+- **NHSPC 2025**: Mentor & Problem Setter - problem design and contest coordination
+- **BUBT-BAPS National Programming Camp 2025**: General Member
+- Community building and knowledge sharing initiatives
 
 ### 7. **Academic Background** (`AcademicBackground.tsx`)
-- Educational institutions
-- Degrees and certifications
-- Academic achievements
+- **Shahjalal University of Science and Technology (SUST)**
+- B.Sc. in Computer Science and Engineering
+- CGPA: 3.70/4.00 (up to 6th semester)
+- Expected Graduation: February 2026
 
 ### 8. **Recognitions & Awards** (`Recognitions.tsx`)
-- Competitive programming achievements
-- Direct links to contest standings (Codeforces, Toph, HackerRank, etc.)
-- Awards and honors
+- **Competitive Programming Profiles**:
+  - Codeforces Expert (Max: 1640) - [@go_mu](https://codeforces.com/profile/go_mu)
+  - CodeChef 5★ (Max: 2007) - [@gom_u](https://www.codechef.com/users/gom_u)
+  - AtCoder Green Coder (Max: 1088) - [@go_mu](https://atcoder.jp/users/go_mu)
+- **IUPC Achievements**: Top rankings in DUET, KUET, BUET, SUST, and more
+- **Notable Wins**:
+  - 5th place - National Undergraduate Math Olympiad 2022 (Sylhet)
+  - Champion - 8th DRMC International Tech Carnival 2025 (Selection)
+  - Finalist - SRBD Code Contest 2025
+  - 1st Runner Up - Brain Craft Intra SUST Programming Contest 2023
+- **Table Tennis**: Champion at SUST CSE Intra TT & SUST Open TT (Singles), University Team 2025
+- Direct links to contest standings on Toph, Codeforces, HackerRank, BAPSOJ
 
 ### 9. **Contact** (`Contact.tsx`)
-- Email and phone information
-- Social media links
-- Location details
+- Email: prosanto0das23@gmail.com
+- Phone: +880 1701 140907
+- GitHub: [@prosanto0das](https://github.com/prosanto0das)
+- LinkedIn: [prosanto-das](https://www.linkedin.com/in/prosanto-das-90ba09361/)
+- Location: Shahjalal University of Science and Technology, Sylhet, Bangladesh
 
 ---
 
@@ -467,10 +518,17 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **Prosanto Das**
 
-- 🌐 Website: [Your Website](https://your-portfolio-url.com)
-- 📧 Email: [your.email@example.com](mailto:your.email@example.com)
-- 💼 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
+- 🌐 Portfolio: [https://my-portfolio-ten-taupe-61.vercel.app/](https://my-portfolio-ten-taupe-61.vercel.app/)
+- 📧 Email: [prosanto0das23@gmail.com](mailto:prosanto0das23@gmail.com)
+- 📱 Phone: +880 1701 140907
+- 💼 LinkedIn: [prosanto-das](https://www.linkedin.com/in/prosanto-das-90ba09361/)
 - 🐙 GitHub: [@prosanto0das](https://github.com/prosanto0das)
+- 📍 Location: Shahjalal University of Science and Technology, Sylhet, Bangladesh
+
+**Competitive Programming Profiles:**
+- 🔵 Codeforces: [@go_mu](https://codeforces.com/profile/go_mu) (Expert, 1640)
+- 🟤 CodeChef: [@gom_u](https://www.codechef.com/users/gom_u) (5★, 2007)
+- 🟢 AtCoder: [@go_mu](https://atcoder.jp/users/go_mu) (Green, 1088)
 
 **Project Link**: [https://github.com/prosanto0das/My-Portfolio-](https://github.com/prosanto0das/My-Portfolio-)
 
