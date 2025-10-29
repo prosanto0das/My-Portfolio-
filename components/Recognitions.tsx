@@ -224,7 +224,7 @@ export default function Recognitions() {
           </div>
           <div className="card p-6 text-center">
             <div className="text-4xl font-bold gradient-text mb-2">5★</div>
-            <p className="text-gray-300">CodeChef (Max: 2107)</p>
+            <p className="text-gray-300">CodeChef (Max: 2007)</p>
             <a
               href="https://www.codechef.com/users/gom_u"
               target="_blank"

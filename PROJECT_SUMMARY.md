@@ -107,7 +107,7 @@ All content was extracted from your CV and properly integrated:
 
 ✅ **Achievements**
 - Codeforces Expert (Max: 1640)
-- CodeChef 5★ (Max: 2107)
+- CodeChef 5★ (Max: 2007)
 - ICPC Asia West Finalist 2022
 - Multiple IUPC placements
 - 2800+ problems solved
