@@ -12,7 +12,7 @@
 
 *Clean dark UI • Smooth animations • Fully responsive • SEO optimized*
 
-[🌐 View Live Demo](https://my-portfolio-ten-taupe-61.vercel.app/) • [Report Bug](https://github.com/prosanto0das/My-Portfolio-/issues) • [Request Feature](https://github.com/prosanto0das/My-Portfolio-/issues)
+[🌐 View Live Demo](https://prosantodas.vercel.app/) • [Report Bug](https://github.com/prosanto0das/My-Portfolio-/issues) • [Request Feature](https://github.com/prosanto0das/My-Portfolio-/issues)
 
 </div>
 
@@ -518,7 +518,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **Prosanto Das**
 
-- 🌐 Portfolio: [https://my-portfolio-ten-taupe-61.vercel.app/](https://my-portfolio-ten-taupe-61.vercel.app/)
+- 🌐 Portfolio: [https://prosantodas.vercel.app/](https://prosantodas.vercel.app/)
 - 📧 Email: [prosanto0das23@gmail.com](mailto:prosanto0das23@gmail.com)
 - 📱 Phone: +880 1701 140907
 - 💼 LinkedIn: [prosanto-das](https://www.linkedin.com/in/prosanto-das-90ba09361/)
