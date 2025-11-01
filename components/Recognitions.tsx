@@ -154,7 +154,7 @@ export default function Recognitions() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-visible pb-2">
           {isInView && 'Recognitions & Awards'.split('').map((char, index) => (
             <motion.span
               key={index}
