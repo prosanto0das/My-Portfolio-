@@ -17,8 +17,41 @@ export default function Contact() {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-          Let&apos;s Connect
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 overflow-hidden">
+          {isInView && "Let's Connect".split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                y: 100,
+                rotateZ: -90
+              }}
+              animate={{ 
+                opacity: 1,
+                y: 0,
+                rotateZ: 0
+              }}
+              transition={{ 
+                duration: 0.6,
+                delay: index * 0.07,
+                ease: [0.68, -0.55, 0.265, 1.55]
+              }}
+              whileHover={{
+                scale: 1.5,
+                color: '#10B981',
+                textShadow: '0 0 30px rgba(16, 185, 129, 0.9)',
+                rotateZ: 360,
+                transition: { duration: 0.5 }
+              }}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && "Let's Connect"}
         </h2>
         <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
           Feel free to reach out for collaborations, opportunities, or just to say hi!
@@ -118,16 +151,6 @@ export default function Contact() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 pt-8 border-t border-gray-700"
-        >
-          <p className="text-gray-400">
-            © 2025 Prosanto Das. Built with Next.js, TypeScript & Framer Motion.
-          </p>
-        </motion.div>
       </motion.div>
     </section>
   )

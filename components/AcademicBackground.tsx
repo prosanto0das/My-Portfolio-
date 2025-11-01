@@ -33,8 +33,42 @@ export default function AcademicBackground() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Academic Background
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Academic Background'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                scale: 0,
+                rotateY: 180
+              }}
+              animate={{ 
+                opacity: 1,
+                scale: 1,
+                rotateY: 0
+              }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.04,
+                type: "spring",
+                stiffness: 120,
+                damping: 12
+              }}
+              whileHover={{
+                scale: 1.4,
+                color: '#34D399',
+                textShadow: '0 0 20px rgba(52, 211, 153, 0.8)',
+                transition: { duration: 0.2 }
+              }}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Academic Background'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
           My formal education and qualifications.

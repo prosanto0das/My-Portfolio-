@@ -76,8 +76,44 @@ export default function TechnicalSkills() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Technical Skills
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Technical Skills'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0, 
+                y: 50,
+                rotateX: -90,
+                scale: 0
+              }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                rotateX: 0,
+                scale: 1
+              }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.08,
+                ease: [0.25, 0.4, 0.25, 1],
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{
+                scale: 1.2,
+                color: '#60A5FA',
+                textShadow: '0 0 20px rgba(96, 165, 250, 0.8)',
+                transition: { duration: 0.2 }
+              }}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center bottom'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Technical Skills'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
           A curated set of languages, frameworks, and tools I excel at.

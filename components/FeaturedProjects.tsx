@@ -51,8 +51,40 @@ export default function FeaturedProjects() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Featured Projects
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Featured Projects'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                x: -100,
+                rotate: -180
+              }}
+              animate={{ 
+                opacity: 1,
+                x: 0,
+                rotate: 0
+              }}
+              transition={{ 
+                duration: 0.6,
+                delay: index * 0.05,
+                ease: [0.43, 0.13, 0.23, 0.96]
+              }}
+              whileHover={{
+                scale: 1.3,
+                rotate: 15,
+                color: '#A78BFA',
+                transition: { duration: 0.2 }
+              }}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Featured Projects'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
           A selection of projects showcasing my skills and interests.

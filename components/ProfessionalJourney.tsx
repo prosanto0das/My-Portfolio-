@@ -52,8 +52,40 @@ export default function ProfessionalJourney() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Professional Journey
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Professional Journey'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                scale: 3,
+                filter: 'blur(10px)'
+              }}
+              animate={{ 
+                opacity: 1,
+                scale: 1,
+                filter: 'blur(0px)'
+              }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.04,
+                ease: "easeOut"
+              }}
+              whileHover={{
+                scale: 1.4,
+                color: '#FB923C',
+                textShadow: '0 0 20px rgba(251, 146, 60, 0.9)',
+                filter: 'blur(0px)',
+                transition: { duration: 0.2 }
+              }}
+              style={{ 
+                display: 'inline-block'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Professional Journey'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
           My career path, key roles, and contributions in the tech industry.

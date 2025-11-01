@@ -32,8 +32,43 @@ export default function Research() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Research Experience
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Research Experience'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                x: index % 2 === 0 ? -50 : 50,
+                rotateX: 90
+              }}
+              animate={{ 
+                opacity: 1,
+                x: 0,
+                rotateX: 0
+              }}
+              transition={{ 
+                duration: 0.6,
+                delay: index * 0.05,
+                type: "spring",
+                stiffness: 100,
+                damping: 10
+              }}
+              whileHover={{
+                scale: 1.4,
+                rotateY: 180,
+                color: '#818CF8',
+                textShadow: '0 0 20px rgba(129, 140, 248, 0.8)',
+                transition: { duration: 0.3 }
+              }}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Research Experience'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
           Selected research initiatives with measurable outcomes in NLP and algorithms.

@@ -154,8 +154,42 @@ export default function Recognitions() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Recognitions & Awards
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Recognitions & Awards'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                y: -100,
+                scale: 2
+              }}
+              animate={{ 
+                opacity: 1,
+                y: 0,
+                scale: 1
+              }}
+              transition={{ 
+                duration: 0.4,
+                delay: index * 0.03,
+                ease: "easeOut",
+                type: "spring",
+                stiffness: 150
+              }}
+              whileHover={{
+                scale: 1.5,
+                y: -10,
+                color: '#FBBF24',
+                textShadow: '0 0 25px rgba(251, 191, 36, 0.9)',
+                transition: { duration: 0.2 }
+              }}
+              style={{ 
+                display: 'inline-block'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Recognitions & Awards'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
           Highlights of my competitive programming and academic milestones.

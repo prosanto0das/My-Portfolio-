@@ -42,8 +42,41 @@ export default function Leadership() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center">
-          Leadership, Mentorship & Extracurriculars
+        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
+          {isInView && 'Leadership, Mentorship & Extracurriculars'.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ 
+                opacity: 0,
+                rotateZ: 360,
+                scale: 0.3
+              }}
+              animate={{ 
+                opacity: 1,
+                rotateZ: 0,
+                scale: 1
+              }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.02,
+                ease: [0.6, -0.05, 0.01, 0.99]
+              }}
+              whileHover={{
+                scale: 1.3,
+                rotateZ: 180,
+                color: '#F472B6',
+                textShadow: '0 0 20px rgba(244, 114, 182, 0.8)',
+                transition: { duration: 0.3 }
+              }}
+              style={{ 
+                display: 'inline-block',
+                transformOrigin: 'center'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+          {!isInView && 'Leadership, Mentorship & Extracurriculars'}
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
           Initiatives and contributions beyond coursework that built community, leadership, and teamwork.
