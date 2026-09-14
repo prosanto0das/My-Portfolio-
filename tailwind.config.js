@@ -1,40 +1,30 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#0a0e27',
-        'dark-card': '#141b3d',
-        'accent-blue': '#6b9aff',
-        'accent-purple': '#d97fe9',
+        navy: '#07183D',
+        'navy-light': '#0F2A5C',
+        accent: '#FF6B00',
+        interactive: '#3420B8',
+        'interactive-hover': '#2A1A96',
+        'gray-soft': '#F5F6F8',
+        line: '#E7EAF0',
       },
-      backgroundImage: {
-        'gradient-text': 'linear-gradient(135deg, #6b9aff 0%, #d97fe9 100%)',
-        'gradient-bg': 'linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f0a1e 100%)',
+      fontFamily: {
+        sans: ['Inter', 'Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'slide-up': 'slideUp 0.6s ease-out',
-        'float': 'float 3s ease-in-out infinite',
+      boxShadow: {
+        soft: '0 6px 24px rgba(7, 24, 61, 0.08)',
+        'soft-lg': '0 16px 48px rgba(7, 24, 61, 0.12)',
       },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
+      borderRadius: {
+        pill: '999px',
       },
     },
   },

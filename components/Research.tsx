@@ -1,111 +1,98 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { FaBrain, FaDna } from 'react-icons/fa'
+import Reveal from './Reveal'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 
 const research = [
   {
-    title: 'Problem Tag Detection (NLP, ML)',
-    description:
-      'Built an 8K-problem dataset from Codeforces and fine-tuned distilbert-base-uncased, achieving 66% accuracy in automatic problem categorization.',
-    icon: FaBrain,
-    tags: ['NLP', 'Transformers', 'BERT', 'Fine-tuning'],
+    title: 'Problem Tag Detection',
+    category: 'NLP & ML',
+    badge: 'IEEE QPAIN',
+    link: 'https://ieeexplore.ieee.org/document/11545722',
+    bullets: [
+      'Built an ML system to predict topic tags from 9,500+ Codeforces problems using multi-label classification.',
+      'Applied transformer models (RoBERTa, DistilBERT, DeBERTa-v3) alongside TF-IDF + Logistic Regression baselines.',
+      'Achieved strong accuracy in automatic problem categorization, helping beginners efficiently select relevant problems and improve learning outcomes.',
+    ],
+    tags: ['NLP', 'Transformers', 'Multi-label Classification', 'Codeforces'],
   },
   {
-    title: 'Genome Sequence Reconstruction (Algorithms)',
-    description:
-      'Developed a scalable overlap detection system using k-mer indexing and graph-based methods to improve efficiency in large sequencing datasets.',
-    icon: FaDna,
-    tags: ['Algorithms', 'Graphs', 'K-mer Indexing'],
+    title: 'Genome Sequence Reconstruction',
+    category: 'Algorithms',
+    bullets: [
+      'Addressed longest suffix-prefix overlap detection between DNA reads for real-time genome reconstruction.',
+      'Proposed a dynamic framework using a modified Suffix Automaton, enabling online sequence insertion.',
+      'Improves scalability and memory efficiency over static structures for large-scale genomic analysis.',
+    ],
+    tags: ['Algorithms', 'Suffix Automaton', 'DNA Reads', 'Scalability'],
   },
 ]
 
 export default function Research() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
-    <section ref={ref} className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-      >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-hidden">
-          {isInView && 'Research Experience'.split('').map((char, index) => (
-            <motion.span
-              key={index}
-              initial={{ 
-                opacity: 0,
-                x: index % 2 === 0 ? -50 : 50,
-                rotateX: 90
-              }}
-              animate={{ 
-                opacity: 1,
-                x: 0,
-                rotateX: 0
-              }}
-              transition={{ 
-                duration: 0.6,
-                delay: index * 0.05,
-                type: "spring",
-                stiffness: 100,
-                damping: 10
-              }}
-              whileHover={{
-                scale: 1.4,
-                rotateY: 180,
-                color: '#818CF8',
-                textShadow: '0 0 20px rgba(129, 140, 248, 0.8)',
-                transition: { duration: 0.3 }
-              }}
-              style={{ 
-                display: 'inline-block',
-                transformOrigin: 'center'
-              }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </motion.span>
-          ))}
-          {!isInView && 'Research Experience'}
+    <section id="research" className="section">
+      <Reveal>
+        <p className="text-sm font-bold text-accent uppercase tracking-widest mb-3">Research</p>
+        <h2 className="section-heading">
+          Where ML meets <span className="highlight">algorithms</span>
         </h2>
-        <p className="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
-          Selected research initiatives with measurable outcomes in NLP and algorithms.
+        <p className="text-slate-500 text-lg mt-4 max-w-2xl">
+          Published work and explorations that pair modern ML models with rigorous algorithmic foundations.
         </p>
-        <div className="section-divider mb-12" />
+      </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {research.map((r, i) => {
-            const Icon = r.icon
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -6 }}
-                className="card p-6"
-              >
-                <div className="flex items-start gap-4 mb-3">
-                  <div className="bg-gradient-to-br from-accent-blue to-accent-purple p-3 rounded-lg">
-                    <Icon className="text-2xl text-white" />
+      <div className="mt-14 max-w-4xl mx-auto relative">
+        {/* Continuous timeline line */}
+        <span className="absolute left-[7px] top-2 bottom-2 w-px bg-line" />
+
+        <div className="space-y-14">
+          {research.map((r, i) => (
+            <Reveal key={r.title} delay={i * 80}>
+              <div className="relative pl-8">
+                <span className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full bg-accent border-4 border-[#FAFAFA] shadow-soft" />
+
+                {/* Header */}
+                <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                  <div>
+                    <h3 className="text-xl font-bold text-navy">
+                      {r.title} <span className="text-slate-400 font-semibold">— {r.category}</span>
+                    </h3>
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-white">
-                    {r.title}
-                  </h3>
+                  {r.badge && (
+                    <a
+                      href={r.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-interactive rounded-full px-4 py-2 hover:opacity-90 transition-opacity"
+                    >
+                      {r.badge} <FaExternalLinkAlt className="text-xs" />
+                    </a>
+                  )}
                 </div>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">{r.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {r.tags.map((t, idx) => (
-                    <span key={idx} className="tech-badge text-xs">{t}</span>
+
+                {/* Bullets */}
+                <ul className="mt-4 space-y-2">
+                  {r.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2.5 text-slate-600 leading-relaxed text-[15px]">
+                      <span className="mt-[9px] w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {r.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
+                    </span>
                   ))}
                 </div>
-              </motion.div>
-            )
-          })}
+              </div>
+            </Reveal>
+          ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

@@ -1,289 +1,256 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { FaTrophy, FaMedal, FaStar } from 'react-icons/fa'
-import type { IconType } from 'react-icons'
+import { useState } from 'react'
+import Reveal from './Reveal'
+import { FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
-type Recognition = {
-  title: string
-  icon: IconType
-  color: string
-  score: number // higher score => higher priority in the list
-  link?: string // contest link
-}
-
-// Only achievements present in the CV, ordered via a computed score
-const recognitions: Recognition[] = [
+// Order: rating profiles first, then Math Olympiad, then Champion at 4th, then all ranked lowest → highest
+const items = [
   {
-    title: 'Champion, 8th DRMC International Tech Carnival 2025 (Selection Round)',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 1000,
-    link: 'https://toph.co/c/preliminary-8th-drmc-intl-tech-carnival-2025/standings',
+    title: (
+      <>
+        Codeforces: <span className="font-bold text-navy">Expert</span>{' '}
+        <span className="font-semibold text-accent">(Max 1640)</span>
+      </>
+    ),
+    href: 'https://codeforces.com/profile/go_mu',
   },
   {
-    title: '1st runner up, Brain Craft Intra SUST Programming Contest 2023 (Selection Round)',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 900,
-    link: 'https://codeforces.com/gym/433546/standings',
+    title: (
+      <>
+        CodeChef: <span className="font-bold text-navy">5★</span>{' '}
+        <span className="font-semibold text-accent">(Max 2007)</span>
+      </>
+    ),
+    href: 'https://www.codechef.com/users/gom_u',
   },
   {
-    title: 'Finalist, SRBD Code Contest 2025',
-    icon: FaMedal,
-    color: 'from-blue-400 to-blue-600',
-    score: 850,
-    link: 'https://www.hackerrank.com/contests/srbd-code-contest-2025-round-1/leaderboard',
+    title: (
+      <>
+        <span className="font-bold text-navy">5th</span> — National Undergrad{' '}
+        <span className="font-bold text-navy">Math Olympiad</span> 2022
+      </>
+    ),
+    href: '',
   },
   {
-    title: '5th place, National Undergraduate Mathematics Olympiad Bangladesh 2022, Sylhet',
-    icon: FaMedal,
-    color: 'from-blue-400 to-blue-600',
-    score: 800,
+    title: (
+      <>
+        <span className="font-bold text-interactive">17th</span> — ICPC Dhaka Regional 2025
+      </>
+    ),
+    href: 'https://icpc.global/regionals/finder/Dhaka-2026/standings',
+    icpc: true,
   },
   {
-    title: '5th in DRMC International Tech Carnival Programming Contest 2025',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 750,
-    link: 'https://toph.co/contests/training/z9wvv8k/standings',
+    title: (
+      <>
+        <span className="font-bold text-accent">Champion</span> — DRMC Tech Carnival (Selection)
+      </>
+    ),
+    href: 'https://toph.co/c/preliminary-8th-drmc-intl-tech-carnival-2025/standings',
   },
   {
-    title: '11th in IIUC Programming Contest 2023',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 700,
-    link: 'https://toph.co/c/15th-iiuc-inter-university-2023/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">2nd</span> — Intra SUST 2023 (Selection)
+      </>
+    ),
+    href: 'https://codeforces.com/gym/433546/standings',
   },
   {
-    title: '9th in ShellBeeHaken Intra SUST Programming Contest 2024',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 690,
-    link: 'https://codeforces.com/gym/525750/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">5th</span> — DRMC Tech Carnival 2025
+      </>
+    ),
+    href: 'https://toph.co/contests/training/z9wvv8k/standings',
   },
   {
-    title: '27th in DUET IUPC 2025',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 580,
-    link: 'https://toph.co/c/duet-inter-university-iupc-2025/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">9th</span> — Intra SUST 2024
+      </>
+    ),
+    href: 'https://codeforces.com/gym/525750/standings',
   },
   {
-    title: '36th in KUET IUPC 2025',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 570,
-    link: 'https://bapsoj.org/contests/miaki-presents-kuet-iupc-onsite-2025/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">11th</span> — IIUC Programming Contest 2023
+      </>
+    ),
+    href: 'https://toph.co/c/15th-iiuc-inter-university-2023/standings',
   },
   {
-    title: '36th in UIU IUPC 2025',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 570,
-    link: 'https://bapsoj.org/contests/uiu-inter-university-programming-contest-2025/standings',
+    title: (
+      <>
+        <span className="font-bold text-interactive">22nd</span> — ICPC Dhaka Preliminary 2025
+      </>
+    ),
+    href: 'https://bapsoj.org/contests/icpc-dhaka-2025-online-preliminary/standings',
+    icpc: true,
   },
   {
-    title: '37th in Uttara University IUPC 2025',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 560,
-    link: 'https://toph.co/c/uttara-university-inter-university-2025/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">27th</span> — DUET IUPC 2025
+      </>
+    ),
+    href: 'https://toph.co/c/duet-inter-university-iupc-2025/standings',
   },
   {
-    title: '46th in AUST IUPC 2025',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 540,
-    link: 'https://toph.co/c/mtb-presents-aust-inter-university-2025/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">36th</span> — KUET IUPC 2025
+      </>
+    ),
+    href: 'https://bapsoj.org/contests/miaki-presents-kuet-iupc-onsite-2025/standings',
   },
   {
-    title: '49th in SEC Inter University Junior Programming Contest, 2022',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 535,
-    link: 'https://toph.co/c/sec-inter-university-junior-2022/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">36th</span> — UIU IUPC 2025
+      </>
+    ),
+    href: 'https://bapsoj.org/contests/uiu-inter-university-programming-contest-2025/standings',
   },
   {
-    title: '51st in CUET CodeStorm 1.0',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 530,
-    link: 'https://toph.co/c/cuet-inter-university-codestorm-1-0/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">37th</span> — Uttara University IUPC 2025
+      </>
+    ),
+    href: 'https://toph.co/c/uttara-university-inter-university-2025/standings',
   },
   {
-    title: '58th in ICPC Preliminary (Dhaka site) 2024',
-    icon: FaMedal,
-    color: 'from-blue-400 to-blue-600',
-    score: 520,
-    link: 'https://bapsoj.org/contests/icpc-preliminary-dhaka-site-2024/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">46th</span> — AUST IUPC 2025
+      </>
+    ),
+    href: 'https://toph.co/c/mtb-presents-aust-inter-university-2025/standings',
   },
   {
-    title: '62nd in SUST CSE Carnival IUPC 2024',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 510,
-    link: 'https://toph.co/c/inter-university-sust-cse-carnival-2024/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">49th</span> — SEC Inter University Junior 2022
+      </>
+    ),
+    href: 'https://toph.co/c/sec-inter-university-junior-2022/standings',
   },
   {
-    title: '65th in BUET IUPC 2024',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 500,
-    link: 'https://toph.co/c/inter-university-buet-cse-fest-2024/standings',
+    title: (
+      <>
+        <span className="font-bold text-navy">51st</span> — CUET CodeStorm 1.0
+      </>
+    ),
+    href: 'https://toph.co/c/cuet-inter-university-codestorm-1-0/standings',
   },
   {
-    title: '66th in SUST IUPC 2023',
-    icon: FaTrophy,
-    color: 'from-yellow-400 to-orange-500',
-    score: 490,
-    link: 'https://toph.co/c/sust-iupc-2023',
+    title: (
+      <>
+        <span className="font-bold text-interactive">58th</span> — ICPC Dhaka Preliminary 2024
+      </>
+    ),
+    href: 'https://bapsoj.org/contests/icpc-preliminary-dhaka-site-2024/standings',
+    icpc: true,
+  },
+  {
+    title: (
+      <>
+        <span className="font-bold text-navy">62nd</span> — SUST CSE Carnival IUPC 2024
+      </>
+    ),
+    href: 'https://toph.co/c/inter-university-sust-cse-carnival-2024/standings',
+  },
+  {
+    title: (
+      <>
+        <span className="font-bold text-navy">65th</span> — BUET IUPC 2024
+      </>
+    ),
+    href: 'https://toph.co/c/inter-university-buet-cse-fest-2024/standings',
+  },
+  {
+    title: (
+      <>
+        <span className="font-bold text-navy">66th</span> — SUST IUPC 2023
+      </>
+    ),
+    href: 'https://toph.co/c/sust-iupc-2023',
   },
 ]
 
+function AchievementRow({ item, index }: { item: (typeof items)[number]; index: number }) {
+  const inner = (
+    <div className="relative pl-8">
+      <span className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full bg-accent border-4 border-[#FFFFFF] shadow-soft" />
+
+      <div className="flex items-start justify-between gap-3 group">
+        <span className="flex items-start gap-2.5 text-slate-600 group-hover:text-navy transition-colors leading-snug">
+          {item.title}
+        </span>
+        {item.href && (
+          <FaExternalLinkAlt className="text-slate-300 text-xs shrink-0 mt-1 group-hover:text-accent transition-colors" />
+        )}
+      </div>
+    </div>
+  )
+  return item.href ? (
+    <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="block">
+      {inner}
+    </a>
+  ) : (
+    <div key={index}>{inner}</div>
+  )
+}
+
 export default function Recognitions() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [showAll, setShowAll] = useState(false)
+  const visible = showAll ? items : items.slice(0, 5)
 
   return (
-    <section ref={ref} className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-      >
-        <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 text-center overflow-visible pb-2">
-          {isInView && 'Recognitions & Awards'.split('').map((char, index) => (
-            <motion.span
-              key={index}
-              initial={{ 
-                opacity: 0,
-                y: -100,
-                scale: 2
-              }}
-              animate={{ 
-                opacity: 1,
-                y: 0,
-                scale: 1
-              }}
-              transition={{ 
-                duration: 0.4,
-                delay: index * 0.03,
-                ease: "easeOut",
-                type: "spring",
-                stiffness: 150
-              }}
-              whileHover={{
-                scale: 1.5,
-                y: -10,
-                color: '#FBBF24',
-                textShadow: '0 0 25px rgba(251, 191, 36, 0.9)',
-                transition: { duration: 0.2 }
-              }}
-              style={{ 
-                display: 'inline-block'
-              }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </motion.span>
-          ))}
-          {!isInView && 'Recognitions & Awards'}
+    <section id="recognitions" className="section bg-[#FFFFFF]">
+      <Reveal>
+        <p className="text-sm font-bold text-accent uppercase tracking-widest mb-3">Achievements</p>
+        <h2 className="section-heading">
+          Placements that <span className="highlight">speak for themselves</span>
         </h2>
-        <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-          Highlights of my competitive programming and academic milestones.
+        <p className="text-slate-500 text-lg mt-4 max-w-2xl">
+          A record of top finishes — from ICPC Dhaka Regional to national programming contests.
         </p>
-        <div className="section-divider mb-12" />
+      </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...recognitions]
-            .sort((a, b) => b.score - a.score)
-            .map((recognition, index) => {
-            const Icon = recognition.icon
-            
-            const cardContent = (
-              <>
-                <div className={`inline-block p-4 rounded-full bg-gradient-to-br ${recognition.color} mb-4`}>
-                  <Icon className="text-3xl text-white" />
-                </div>
-                <p className="text-white font-medium leading-relaxed group-hover:text-accent-blue transition-colors">
-                  {recognition.title}
-                </p>
-              </>
-            )
-            
-            if (recognition.link) {
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="card p-6 text-center group cursor-pointer"
-                  onClick={() => window.open(recognition.link, '_blank')}
-                >
-                  {cardContent}
-                </motion.div>
-              )
-            }
-            
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="card p-6 text-center group"
-              >
-                {cardContent}
-              </motion.div>
-            )
-          })}
+      <div className="mt-14 max-w-4xl mx-auto relative">
+        {/* Continuous timeline line */}
+        <span className="absolute left-[7px] top-2 bottom-2 w-px bg-line" />
+
+        <div className="space-y-4">
+          {visible.map((item, i) => (
+            <AchievementRow key={i} item={item} index={i} />
+          ))}
         </div>
 
-        {/* Additional CP Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          <div className="card p-6 text-center">
-            <div className="text-4xl font-bold gradient-text mb-2">Expert</div>
-            <p className="text-gray-300">Codeforces (Max: 1640)</p>
-            <a
-              href="https://codeforces.com/profile/go_mu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent-blue hover:text-accent-purple text-sm mt-2 inline-block"
+        {items.length > 5 && (
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-line text-navy font-semibold text-sm hover:border-accent hover:text-accent hover:bg-[#FFF8F2] transition-colors"
             >
-              @go_mu
-            </a>
+              {showAll ? (
+                <>
+                  Show Less <FaChevronUp className="text-xs" />
+                </>
+              ) : (
+                <>
+                  Show More Achievements <FaChevronDown className="text-xs" />
+                </>
+              )}
+            </button>
           </div>
-          <div className="card p-6 text-center">
-            <div className="text-4xl font-bold gradient-text mb-2">5★</div>
-            <p className="text-gray-300">CodeChef (Max: 2007)</p>
-            <a
-              href="https://www.codechef.com/users/gom_u"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent-blue hover:text-accent-purple text-sm mt-2 inline-block"
-            >
-              @gom_u
-            </a>
-          </div>
-          <div className="card p-6 text-center">
-            <div className="text-4xl font-bold gradient-text mb-2">2800+</div>
-            <p className="text-gray-300">Problems Solved</p>
-            <p className="text-sm text-gray-400 mt-2">
-              Across multiple platforms
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
+        )}
+      </div>
     </section>
   )
 }

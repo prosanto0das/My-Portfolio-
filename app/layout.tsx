@@ -2,25 +2,31 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Prosanto Das | Software Engineer & Competitive Programmer',
-  description: 'Portfolio of Prosanto Das - Software Engineer, Competitive Programmer, and Full-Stack Developer specializing in modern web technologies and problem-solving.',
-  keywords: ['Prosanto Das', 'Software Engineer', 'Competitive Programming', 'Web Developer', 'MERN Stack'],
+  title: 'Prosanto Das | AI/ML Software Engineer',
+  description:
+    'Portfolio of Prosanto Das — AI/ML Software Engineer focused on infrastructure, distributed systems, and production ML systems. Competitive programmer (Codeforces Expert, CodeChef 5★).',
+  keywords: [
+    'Prosanto Das',
+    'AI/ML Engineer',
+    'Software Engineer',
+    'MLOps',
+    'Distributed Systems',
+    'Python',
+    'PyTorch',
+    'Competitive Programming',
+  ],
   authors: [{ name: 'Prosanto Das' }],
   openGraph: {
-    title: 'Prosanto Das | Software Engineer & Competitive Programmer',
-    description: 'Portfolio showcasing projects, achievements, and technical skills',
+    title: 'Prosanto Das | AI/ML Software Engineer',
+    description: 'Portfolio showcasing AI, ML, and infrastructure engineering work.',
     type: 'website',
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-[#FAFAFA] text-navy antialiased">{children}</body>
     </html>
   )
 }

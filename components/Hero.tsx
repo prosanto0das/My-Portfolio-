@@ -1,165 +1,146 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { FaGithub, FaLinkedin, FaChartBar, FaEnvelope, FaMapMarkerAlt, FaArrowDown } from 'react-icons/fa'
+
+type Node = {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  r: number
+}
 
 export default function Hero() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  // Subtle animated network background
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let raf = 0
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    let nodes: Node[] = []
+    let width = 0
+    let height = 0
+
+    const resize = () => {
+      const rect = canvas.parentElement?.getBoundingClientRect()
+      width = rect?.width ?? window.innerWidth
+      height = rect?.height ?? window.innerHeight
+      canvas.width = width * dpr
+      canvas.height = height * dpr
+      canvas.style.width = `${width}px`
+      canvas.style.height = `${height}px`
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+
+      const count = Math.min(60, Math.floor((width * height) / 16000))
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 2.2 + 1,
+      }))
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height)
+
+      for (const node of nodes) {
+        node.x += node.vx
+        node.y += node.vy
+        if (node.x < 0 || node.x > width) node.vx *= -1
+        if (node.y < 0 || node.y > height) node.vy *= -1
+      }
+
+      ctx.lineWidth = 0.6
+      ctx.strokeStyle = 'rgba(7, 24, 61, 0.12)'
+      ctx.fillStyle = 'rgba(7, 24, 61, 0.22)'
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x
+          const dy = nodes[i].y - nodes[j].y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 130) {
+            ctx.globalAlpha = 1 - dist / 130
+            ctx.beginPath()
+            ctx.moveTo(nodes[i].x, nodes[i].y)
+            ctx.lineTo(nodes[j].x, nodes[j].y)
+            ctx.stroke()
+          }
+        }
+        ctx.globalAlpha = 1
+        ctx.beginPath()
+        ctx.arc(nodes[i].x, nodes[i].y, nodes[i].r, 0, Math.PI * 2)
+        ctx.fill()
+      }
+
+      raf = requestAnimationFrame(draw)
+    }
+
+    resize()
+    draw()
+
+    window.addEventListener('resize', resize)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-20 relative">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center z-10 flex flex-col items-center"
-      >
-        {/* Profile Picture */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1, type: 'spring', stiffness: 100 }}
-          className="mb-12 relative"
-          style={{ width: '240px', height: '240px' }}
-        >
-          <motion.div
-            animate={{ 
-              boxShadow: [
-                '0 0 30px rgba(107, 154, 255, 0.4)',
-                '0 0 60px rgba(107, 154, 255, 0.7)',
-                '0 0 30px rgba(107, 154, 255, 0.4)',
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="rounded-full overflow-hidden border-4 border-accent-blue/40 w-full h-full"
-          >
-            <Image
-              src="/profile.jpg"
-              alt="Prosanto Das"
-              width={240}
-              height={240}
-              className="rounded-full object-cover w-full h-full"
-              priority
-            />
-          </motion.div>
-          
-          {/* Rotating gradient ring */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            className="absolute inset-0 rounded-full border-2 border-transparent border-t-accent-blue border-r-accent-purple border-b-accent-blue/30"
-            style={{ width: '240px', height: '240px' }}
-          />
-          
-          {/* Inner glow */}
-          <motion.div
-            animate={{ 
-              boxShadow: [
-                'inset 0 0 20px rgba(107, 154, 255, 0.2)',
-                'inset 0 0 40px rgba(107, 154, 255, 0.4)',
-                'inset 0 0 20px rgba(107, 154, 255, 0.2)',
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute inset-0 rounded-full"
-            style={{ width: '240px', height: '240px' }}
-          />
-        </motion.div>
-        <motion.h1
-          className="text-6xl md:text-8xl font-bold gradient-text mb-4"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          Prosanto Das
-        </motion.h1>
-        
-        <motion.p
-          className="text-xl md:text-2xl text-gray-300 mb-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          Competitive Programmer
-        </motion.p>
+    <section
+      id="top"
+      className="relative min-h-screen bg-[#FAFAFA] flex items-center overflow-hidden"
+    >
+      {/* Network background */}
+      <canvas ref={canvasRef} className="absolute inset-0 opacity-80 pointer-events-none" />
 
-        <motion.p
-          className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          Passionate problem solver with <span className="text-accent-blue font-semibold">Expert</span> rating on Codeforces and <span className="text-accent-blue font-semibold">5★</span> on CodeChef. 
-          Specialized in algorithms, data structures, and building scalable full-stack applications. 
-          Solved <span className="text-accent-blue font-semibold">2800+</span> competitive programming problems across multiple platforms.
-        </motion.p>
+      <div className="relative z-10 section grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full pt-28 pb-20">
+        {/* Left: intro */}
+        <div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-navy">
+            Prosanto
+            <span className="highlight block">Das</span>
+          </h1>
+          <p className="text-2xl md:text-3xl font-bold text-navy mt-4">
+            Software Engineer
+          </p>
+          <p className="text-slate-500 text-lg mt-6 max-w-xl leading-relaxed">
+            I build intelligent, automated systems — from Gen AI and Agentic AI to N8N
+            workflows. AWS Certified Solutions Architect, and a competitive programmer at heart.
+          </p>
 
-        <motion.div
-          className="flex gap-6 justify-center mb-8 text-3xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <motion.a
-            href="https://github.com/prosanto0das"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-accent-blue transition-colors duration-300"
-            whileHover={{ scale: 1.3, rotate: 360, color: '#6b9aff' }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <FaGithub />
-          </motion.a>
-          <motion.a
-            href="https://www.linkedin.com/in/prosanto-das-90ba09361/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-accent-blue transition-colors duration-300"
-            whileHover={{ scale: 1.3, rotate: 360 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <FaLinkedin />
-          </motion.a>
-          <motion.a
-            href="https://codeforces.com/profile/go_mu"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-accent-blue transition-colors duration-300"
-            whileHover={{ scale: 1.3, rotate: 360 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <FaChartBar />
-          </motion.a>
-        </motion.div>
 
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm md:text-base"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <motion.div 
-            className="flex items-center gap-2 px-4 py-2 bg-dark-card rounded-full border border-accent-blue/20"
-            whileHover={{ scale: 1.05, borderColor: '#6b9aff', boxShadow: '0 0 20px rgba(107, 154, 255, 0.3)' }}
-            transition={{ type: 'spring', stiffness: 400 }}
-          >
-            <FaMapMarkerAlt className="text-accent-blue" />
-            <span className="text-gray-300">Sylhet, Bangladesh</span>
-          </motion.div>
-          <motion.div 
-            className="flex items-center gap-2 px-4 py-2 bg-dark-card rounded-full border border-accent-blue/20"
-            whileHover={{ scale: 1.05, borderColor: '#6b9aff', boxShadow: '0 0 20px rgba(107, 154, 255, 0.3)' }}
-            transition={{ type: 'spring', stiffness: 400 }}
-          >
-            <FaEnvelope className="text-accent-blue" />
-            <a
-              href="mailto:prosanto0das23@gmail.com"
-              className="text-gray-300 hover:text-accent-blue transition-colors"
-            >
-              prosanto0das23@gmail.com
-            </a>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+        </div>
+
+        {/* Right: circular profile photo */}
+        <div className="flex justify-center">
+          <div className="relative w-[340px] h-[340px] md:w-[420px] md:h-[420px]">
+            <div className="absolute inset-0 rounded-full bg-[#FFD54A] shadow-soft-lg" />
+
+            {/* Decorative orbit rings */}
+            <div className="absolute -inset-4 rounded-full border border-dashed border-navy/15" />
+            <div className="absolute -inset-8 rounded-full border border-navy/8" />
+
+            <div className="absolute inset-4 overflow-hidden rounded-full bg-white shadow-inner">
+              <Image
+                src="/profile.jpg"
+                alt="Prosanto Das"
+                fill
+                priority
+                sizes="(max-width: 768px) 300px, 380px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
