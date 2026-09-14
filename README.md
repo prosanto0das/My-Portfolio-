@@ -34,7 +34,7 @@ A modern, responsive personal portfolio built with **Next.js 14**, **React 18**,
 | Styling    | Tailwind CSS 3, custom design tokens, responsive layouts            |
 | Animation  | Framer Motion, custom `IntersectionObserver` reveal component       |
 | Icons      | react-icons (Font Awesome)                                          |
-| Deployment | GitHub Pages / Vercel (static export friendly)                      |
+| Deployment | Vercel                                                              |
 
 ## 🚀 Getting Started
 
@@ -105,19 +105,19 @@ The site uses a consistent design language across all sections:
 
 ## 🚢 Deployment
 
-### GitHub Pages
+This project is deployed on **Vercel** and updates automatically whenever changes are pushed to the `main` branch of this repository.
 
-This project can be built as a static site and served from GitHub Pages:
+### Deploy on Vercel (from scratch)
 
 ```bash
-npm run build
+# 1. Install the Vercel CLI
+npm install -g vercel
+
+# 2. Link and deploy from the project root
+vercel --prod
 ```
 
-Then configure GitHub Pages in your repository **Settings → Pages** to point to the appropriate branch/folder (e.g., `gh-pages` or a `/docs` output) and push the generated static files.
-
-### Vercel
-
-The simplest path — import the repository on [Vercel](https://vercel.com); Next.js is auto-detected and the build runs with zero configuration.
+Alternatively, import this repository at [vercel.com/new](https://vercel.com/new) — Next.js is auto-detected and the build runs with zero configuration.
 
 ## 📄 License
 
