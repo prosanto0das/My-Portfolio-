@@ -81,12 +81,6 @@ export default function Contact() {
         </div>
       </Reveal>
 
-      <div className="mt-16 pt-8 border-t border-line flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-400">
-        <p>© {new Date().getFullYear()} Prosanto Das. Built with care.</p>
-        <p className="mono">
-          <span className="text-accent">$</span> status: open_to_opportunities
-        </p>
-      </div>
     </section>
   )
 }
