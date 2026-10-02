@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { FaArrowRight, FaDownload } from 'react-icons/fa'
+import { FaArrowRight } from 'react-icons/fa'
 
 type Node = {
   x: number
@@ -121,14 +121,6 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href="#projects" className="btn-primary">
               View My Work <FaArrowRight className="text-sm" />
-            </a>
-            {/* Add your resume at /public/resume.pdf to enable the download */}
-            <a
-              href="/resume.pdf"
-              download
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-navy/20 text-navy font-semibold text-sm hover:border-accent hover:text-accent transition-colors"
-            >
-              <FaDownload className="text-sm" /> Download Resume
             </a>
           </div>
 
