@@ -19,10 +19,12 @@ const research = [
   {
     title: 'Genome Sequence Reconstruction',
     category: 'Algorithms',
+    badge: 'View Repo',
+    link: 'https://github.com/prosanto0das/Dynamic-SAM-Research',
     bullets: [
-      'Addressed longest suffix-prefix overlap detection between DNA reads for real-time genome reconstruction.',
+      'In-progress research on longest suffix-prefix overlap detection between DNA reads for real-time genome reconstruction.',
       'Proposed a dynamic framework using a modified Suffix Automaton, enabling online sequence insertion.',
-      'Improves scalability and memory efficiency over static structures for large-scale genomic analysis.',
+      'Targets better scalability and memory efficiency than static structures for large-scale genomic analysis.',
     ],
     tags: ['Algorithms', 'Suffix Automaton', 'DNA Reads', 'Scalability'],
   },

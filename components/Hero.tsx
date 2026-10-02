@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { FaArrowRight, FaDownload } from 'react-icons/fa'
 
 type Node = {
   x: number
@@ -109,13 +110,27 @@ export default function Hero() {
             <span className="highlight block">Das</span>
           </h1>
           <p className="text-2xl md:text-3xl font-bold text-navy mt-4">
-            Software Engineer
+            Backend &amp; AI Infrastructure Engineer
           </p>
           <p className="text-slate-500 text-lg mt-6 max-w-xl leading-relaxed">
-            I build intelligent, automated systems — from Gen AI and Agentic AI to N8N
-            workflows. AWS Certified Solutions Architect, and a competitive programmer at heart.
+            I build the backend and infrastructure that powers AI — Java/Spring Boot
+            services, AI gateways, and model-serving pipelines — with AWS certifications
+            and a competitive programmer&apos;s mindset.
           </p>
 
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a href="#projects" className="btn-primary">
+              View My Work <FaArrowRight className="text-sm" />
+            </a>
+            {/* Add your resume at /public/resume.pdf to enable the download */}
+            <a
+              href="/resume.pdf"
+              download
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-navy/20 text-navy font-semibold text-sm hover:border-accent hover:text-accent transition-colors"
+            >
+              <FaDownload className="text-sm" /> Download Resume
+            </a>
+          </div>
 
         </div>
 

@@ -37,9 +37,9 @@ export default function About() {
         <Reveal delay={80}>
           <div className="space-y-5 text-slate-600 text-lg leading-relaxed">
             <p>
-              I&apos;m an AI/ML software engineer focused on the backend and infrastructure
-              side of machine learning — model-serving pipelines, data-heavy services, and
-              the distributed systems that keep them scalable and fast.
+              I&apos;m a backend and AI infrastructure engineer — building the services,
+              APIs, and model-serving pipelines that keep AI products correct, observable,
+              and fast at scale.
             </p>
             <p>
               I&apos;ve built full-stack AI products (voice agents, LLM-powered coaching

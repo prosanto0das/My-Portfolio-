@@ -5,23 +5,23 @@ import Reveal from './Reveal'
 const categories = [
   {
     title: 'Languages',
-    items: ['Python', 'Java', 'C++', 'C', 'JavaScript'],
+    items: ['Python', 'Java', 'C++', 'C', 'JavaScript', 'TypeScript'],
   },
   {
     title: 'Frameworks & Backend',
-    items: ['Spring Boot', 'Node.js', 'Express', 'React'],
+    items: ['Spring Boot', 'Node.js', 'Express', 'React', 'REST APIs', 'Microservices'],
   },
   {
     title: 'AI & LLM Systems',
-    items: ['Generative & Agentic AI', 'RAG', 'LangChain', 'LangGraph'],
+    items: ['Generative & Agentic AI', 'RAG', 'LangChain', 'LangGraph', 'AI Gateways'],
   },
   {
-    title: 'Databases & Cloud',
-    items: ['MongoDB', 'MySQL'],
+    title: 'Databases, Cloud & DevOps',
+    items: ['MongoDB', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'CI/CD'],
   },
   {
-    title: 'Tools & Platforms',
-    items: ['Git', 'GitHub', 'Linux', 'N8N'],
+    title: 'Engineering Practices',
+    items: ['System Design', 'Testing', 'Git', 'GitHub', 'Linux'],
   },
 ]
 

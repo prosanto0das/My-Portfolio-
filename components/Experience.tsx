@@ -24,10 +24,10 @@ const experiences = [
       'Distributed Systems',
     ],
     achievements: [
-      'Develop scalable, production-ready backend services using Java, Spring Boot, and REST APIs.',
-      'Own AI/ML backend infrastructure — integrating AI services and exposing them through reliable, well-documented APIs.',
-      'Contribute to AI gateway architecture: API design, routing, auth, usage tracking, budget management, and reliability.',
-      'Apply system design, microservices, and distributed-systems principles to production AI workloads.',
+      'Design and own production AI gateway APIs — routing, auth, usage tracking, and budget caps — consumed by multiple LLM-backed features.',
+      'Build Java/Spring Boot backend services and REST APIs that power production AI workloads end to end.',
+      'Ship a single, well-documented gateway contract that lets multiple internal teams integrate AI services without duplicating plumbing.',
+      'Apply system design and distributed-systems patterns (caching, rate limiting, queues) to keep AI infrastructure reliable at scale.',
     ],
   },
   {
@@ -38,12 +38,12 @@ const experiences = [
     color: 'bg-accent',
     dot: 'bg-accent',
     summary:
-      'Built a strong enterprise engineering foundation working within the .NET ecosystem and professional software delivery workflows.',
+      'A focused May–Jul 2026 stint in the .NET ecosystem, taken as a deliberate step before moving into a role more aligned with AI/ML backend infrastructure.',
     technologies: ['C#', '.NET', 'OOP', 'Version Control', 'SDLC'],
     achievements: [
-      'Gained hands-on experience with C# and the .NET ecosystem for enterprise software development.',
-      'Strengthened object-oriented programming, debugging, and code-quality practices.',
-      'Collaborated across cross-functional teams within a professional SDLC.',
+      'Shipped enterprise modules in C#/.NET within a structured SDLC, with code review and version-controlled delivery.',
+      'Practiced test-first debugging and code-quality standards that kept assigned features review-ready.',
+      'Delivered alongside cross-functional teams, translating business requirements into tested, shippable code.',
     ],
   },
 ]

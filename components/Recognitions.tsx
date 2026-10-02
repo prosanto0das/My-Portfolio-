@@ -45,7 +45,7 @@ const items = [
   {
     title: (
       <>
-        <span className="font-bold text-accent">Champion</span> — DRMC Tech Carnival (Selection)
+        <span className="font-bold text-accent">Champion</span> — DRMC Tech Carnival 2025 (Preliminary Round)
       </>
     ),
     href: 'https://toph.co/c/preliminary-8th-drmc-intl-tech-carnival-2025/standings',
